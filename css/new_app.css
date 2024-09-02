@@ -1,0 +1,33 @@
+/*
+ * 需要配合 mui-content使用
+ */
+/*.mui-bar-nav.mui-bar {
+	padding-top: 100px;
+}*/
+
+.mui-content {
+	/*padding-top: 100px;*/
+	background-color: white;
+}
+
+/*.mui-action-back {
+	top: -40px;
+}
+
+.mui-title {
+	top: 60px;
+}*/
+
+.font_hz {
+	font-weight: bolder;
+	color: white;
+}
+
+.newhead {
+	background-color: coral;
+	/*background-image: url(../images/new_cai/new_headback.png);*/
+	background-size: 100% 100%;
+}
+body{
+	background-color: white;
+}

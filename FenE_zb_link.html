@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/roomstye.css"/>
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/new_app.css" />
+	</head>
+
+	<body style="background-color: white;">
+
+		<header class="mui-bar mui-bar-nav newhead" style="">
+			<a class="mui-action-back mui-icon  mui-pull-left font_hz" style=""></a>
+			<h1 class="mui-title font_hz" style="">当前份额占比</h1>
+		</header>
+		<div class="mui-content ">
+			<div id="" class="" style="border: none;box-shadow:none;">
+				<!--<form class="mui-input-group" style="margin-top: 10%;">
+					<div class="mui-input-row">
+						<label>盈亏</label>
+						<input id='dqyk' type="text" class="mui-input" placeholder="0.0" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label>手续</label>
+						<input id='sxf' type="text" class="mui-input" placeholder="0.0" readonly="readonly">
+					</div>
+				</form>-->
+
+				<form class="mui-input-group">
+					<!--<div class="mui-input-row">
+						<label style="width: 50%;">yao</label>
+						<input style="width: 50%;" id='' type="text" class="mui-input" placeholder="4万" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label style="width: 50%;">yuwater</label>
+						<input style="width: 50%;" id='' type="text" class="mui-input" placeholder="5万" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label style="width: 50%;">Ding</label>
+						<input style="width: 50%;" id='' type="text" class="mui-input" placeholder="5万" readonly="readonly">
+					</div>
+					
+					<div class="mui-input-row">
+						<label style="width: 50%;">xin</label>
+						<input style="width: 50%;" id='' type="text" class="mui-input" placeholder="8万" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label style="width: 50%;">晨</label>
+						<input style="width: 50%;" id='' type="text" class="mui-input" placeholder="2万" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label style="width: 50%;">初始金額</label>
+						<input style="width: 50%;" id='csje' type="text" value="240000" class="mui-input" placeholder="0.0" readonly="readonly">
+					</div>-->
+					
+				</form>
+
+				<!--<div class="mui-content-padded">
+					<button id='reg' style="background-color: coral;color: white;" class="mui-btn mui-btn-block font_hz">刷新</button>
+				</div>-->
+				<div class="mui-content-padded">
+					<!--<p>推荐部分是选填的,如果是有人推荐您注册的,您也可以填写他的用户id-->
+				</div>
+				<div style="padding-left: 5%">	
+					<div id="container" style="height: 300%;margin-left: 15%;"></div>
+				</div>
+				
+				<!--<p style="text-align: center;">注册即代表同意
+				<span id="openxieyi" href="" style="color: lightseagreen;">服务协议</span>
+			</p>-->
+			</div>
+			<div id="div_list" style="padding-top: 5px;margin-left: 3%;">
+					<div id="" style="" class="show_div">
+						<div id="" style="" class="kjzt">
+							<span id="" style="">
+						数据样列,说明服务没开或挂了
+					</span>
+							<span id="" style="margin-left: 5%;">
+						0
+					</span>
+							<span id="">
+						(元)
+					</span>
+							<span id="" class="time_show" style="">
+						0
+					</span>
+						</div>
+						<div class="history_box box_showdiv" style="">
+							<span class="history_code" id="history1">1</span>
+							<span class="history_code" id="history2">2</span>
+							<span class="history_code" id="history3">3</span>
+
+							<hr class="hr_show" style="" />
+						</div>
+					</div>
+				</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+
+		<script src="js/ajx_all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.signalR-2.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/con_signalr.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/load_js.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		</script>
+ 
+		<script type="text/javascript">
+			var divlist = document.getElementById("div_list");
+			function show_list (date,obj) {
+				
+					var act_obj = obj;
+
+					
+					var div1 = document.createElement("div");
+					div1.classList.add("show_div");
+					var div2 = document.createElement("div");
+					div2.classList.add("kjzt");
+					var div3 = document.createElement("div");
+					div3.classList.add("history_box", "box_showdiv");
+					var sp_1_1 = document.createElement("span");
+				
+					var sp_1_2 = document.createElement("span");
+					sp_1_2.style.marginLeft = "5%";
+					sp_1_2.innerHTML = date;
+//					datelist.push(date);
+					var sp_1_3 = document.createElement("span");
+					sp_1_3.innerHTML = "变动记录: ";
+					var sp_1_4 = document.createElement("span");
+//					sp_1_4.innerHTML = act_obj.myacount.balance;
+//					qylist.push(act_obj.myacount.balance-csje);
+					sp_1_4.classList.add("time_show");
+					var sp_2_1 = document.createElement("span");
+
+					var sp_2_2 = document.createElement("span");
+
+//					if(act_obj.close_profit < 0) {
+//						sp_2_1.innerHTML = "亏";
+//						sp_2_2.innerHTML = "损";
+//						sp_2_1.classList.add("history_code");
+//						sp_2_2.classList.add("history_code");
+//					} else {
+//						sp_2_1.innerHTML = "盈";
+//						sp_2_2.innerHTML = "利";
+//						sp_2_1.classList.add("history_code_yl");
+//						sp_2_2.classList.add("history_code_yl");
+//					}
+
+					var sp_2_3 = document.createElement("span");
+					sp_2_3.style.marginLeft = "10%";
+//					sp_2_3.innerHTML = act_obj.close_profit;
+					var sp_2_4 = document.createElement("span");
+					sp_2_4.style.marginLeft = "10%";
+//					sp_2_4.innerHTML = "手续费:"+ act_obj.commission;
+					var divbz = document.createElement("p");
+					divbz.style.marginTop = "1%";
+					divbz.innerHTML = act_obj.Beizhu_info;
+					var hr1 = document.createElement("hr");
+					hr1.classList.add("hr_show");
+					div1.appendChild(div2);
+					div1.appendChild(div3);
+					div2.appendChild(sp_1_1);
+					div2.appendChild(sp_1_2);
+					div2.appendChild(sp_1_3);
+					div2.appendChild(sp_1_4);
+
+					div3.appendChild(sp_2_1);
+					div3.appendChild(sp_2_2);
+					div3.appendChild(sp_2_3);
+					div3.appendChild(sp_2_4);
+					div3.appendChild(divbz);
+
+					div3.appendChild(hr1);
+
+					divlist.appendChild(div1);
+			}
+		</script>
+		<script type="text/javascript">
+			function creat_li(objstr_in) {
+				objstr = objstr_in['Dic_info']
+				var objlist = objstr;
+
+				
+				while(divlist.hasChildNodes()) //当div下还存在子节点时 循环继续  
+				{
+					divlist.removeChild(divlist.firstChild);
+				}
+
+				var roomn = "历史记录";
+					var arry ={};
+for(var i in objstr){
+	
+    if(objstr.hasOwnProperty(i)&& typeof(objstr[i] )!="function"){
+    	console.log("i="+i)
+    	console.log("objstr[i]="+objstr[i])
+        arry[i] = objstr[i];
+        show_list(i,objstr[i]);
+    }
+}
+//init_echear();
+return;
+				for(var i = 0; i < arry.length; i++) {
+
+					var objn = JSON.parse(objlist[i].jltext);
+					roomn = objn.D_pic;
+					var act_obj = JSON.parse(objn.Mes);
+
+					console.log(JSON.stringify(objn));
+					var div1 = document.createElement("div");
+					div1.classList.add("show_div");
+					var div2 = document.createElement("div");
+					div2.classList.add("kjzt");
+					var div3 = document.createElement("div");
+					div3.classList.add("history_box", "box_showdiv");
+					var sp_1_1 = document.createElement("span");
+					sp_1_1.innerHTML = roomn;
+					var sp_1_2 = document.createElement("span");
+					sp_1_2.style.marginLeft = "5%";
+					sp_1_2.innerHTML = " ";
+					var sp_1_3 = document.createElement("span");
+					sp_1_3.innerHTML = "当前权益: ";
+					var sp_1_4 = document.createElement("span");
+					sp_1_4.innerHTML = act_obj.balance;
+					sp_1_4.classList.add("time_show");
+					var sp_2_1 = document.createElement("span");
+
+					var sp_2_2 = document.createElement("span");
+
+					if(act_obj.close_profit < 0) {
+						sp_2_1.innerHTML = "亏";
+						sp_2_2.innerHTML = "损";
+						sp_2_1.classList.add("history_code");
+						sp_2_2.classList.add("history_code");
+					} else {
+						sp_2_1.innerHTML = "盈";
+						sp_2_2.innerHTML = "利";
+						sp_2_1.classList.add("history_code_yl");
+						sp_2_2.classList.add("history_code_yl");
+					}
+
+					var sp_2_3 = document.createElement("span");
+					sp_2_3.style.marginLeft = "10%";
+					sp_2_3.innerHTML = act_obj.close_profit;
+					var sp_2_4 = document.createElement("span");
+					sp_2_4.style.marginLeft = "10%";
+					sp_2_4.innerHTML = "手续费:"+ act_obj.commission;
+					var divbz = document.createElement("p");
+					divbz.style.marginTop = "1%";
+					divbz.innerHTML = objn.U_pic;
+					var hr1 = document.createElement("hr");
+					hr1.classList.add("hr_show");
+					div1.appendChild(div2);
+					div1.appendChild(div3);
+					div2.appendChild(sp_1_1);
+					div2.appendChild(sp_1_2);
+					div2.appendChild(sp_1_3);
+					div2.appendChild(sp_1_4);
+
+					div3.appendChild(sp_2_1);
+					div3.appendChild(sp_2_2);
+					div3.appendChild(sp_2_3);
+					div3.appendChild(sp_2_4);
+					div3.appendChild(divbz);
+
+					div3.appendChild(hr1);
+
+					divlist.appendChild(div1);
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			var find_oldyl_all_url = "http://150.158.39.209/Mdt/"
+
+			function find_oldyl_all(okfun, errcall) {
+				console.log(find_oldyl_all_url)
+				mui.ajax(find_oldyl_all_url, {
+					data: {					
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 5000,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					crossDomain: true,
+					success: function(datain) {
+						console.log(datain);
+						
+						
+						okfun(datain);
+							
+						
+
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log(errorThrown);
+						errcall();
+					}
+				});
+			}
+			window.onload = function() {
+
+				find_oldyl_all(function(retstr) {
+					console.log("find_oldyl_all")
+					creat_li(retstr);
+				}, function() {
+					console.log("find_oldyl_all_eerr")
+				})
+
+			}
+		</script>
+	</body>
+
+</html>
